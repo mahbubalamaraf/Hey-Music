@@ -634,7 +634,7 @@ const vfm=x=>{x=Math.max(0,x|0);const h=x/3600|0,m=(x%3600)/60|0,c=x%60;return(h
 const vind=t=>{const e=$("vind");e.textContent=t;e.classList.add("on");clearTimeout(vind.t);vind.t=setTimeout(()=>e.classList.remove("on"),900)};
 let vtm;
 function vshow(){vp.classList.remove("hide");clearTimeout(vtm);if(!vv.paused&&!$("vql").classList.contains("open"))vtm=setTimeout(()=>vp.classList.add("hide"),3000)}
-function vopen(){try{document.fonts.load('500 18px "Hind Siliguri"')}catch(e){}vp.classList.add("open");document.documentElement.classList.add("vpo");V.nofs=0;vbars(1);vtheme(1);vfull(1).catch(()=>{if(!HB())vind(T("noFs"))});vrq();if(V.q.length&&V.i<0)$("vql").classList.add("open");vshow()}
+function vopen(){try{document.fonts.load('500 18px "Hind Siliguri"')}catch(e){}vp.classList.add("open");document.documentElement.classList.add("vpo");V.nofs=0;vbars(1);vtheme(1);vind(HB()?"APP ✓":"WEB");vfull(1).catch(()=>{if(!HB())vind(T("noFs"))});vrq();if(V.q.length&&V.i<0)$("vql").classList.add("open");vshow()}
 function vclose(){vv.pause();vsv(1);vp.classList.remove("open");document.documentElement.classList.remove("vpo");vbars(0);try{HB()&&HB().orient({mode:0}).catch(()=>{})}catch(e){}vtheme(0);V.rot=0;vrotA();try{screen.orientation.unlock()}catch(e){}vfull(0).catch(()=>{})}
 async function vfull(on){const d=document,fe=d.fullscreenElement||d.webkitFullscreenElement;if(on){if(!fe)await(vp.requestFullscreen||vp.webkitRequestFullscreen).call(vp)}else if(fe)await(d.exitFullscreen||d.webkitExitFullscreen).call(d)}
 const HB=()=>{try{return window.Capacitor&&Capacitor.isNativePlatform&&Capacitor.isNativePlatform()?(HB.p||(HB.p=Capacitor.registerPlugin("HeyBars"))):null}catch(e){return null}};
