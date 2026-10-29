@@ -1,0 +1,96 @@
+name: Build APK
+on: [workflow_dispatch, push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: mkdir -p www assets && cp audius-player.html www/index.html && cp icon.png assets/icon-only.png
+      - uses: actions/setup-node@v4
+        with: { node-version: 20 }
+      - uses: actions/setup-java@v4
+        with: { distribution: temurin, java-version: 21 }
+      - run: npm i @capacitor/core @capacitor/cli @capacitor/android
+      - run: npm i -D @capacitor/assets
+      - run: npx cap add android
+      - name: Add immersive fullscreen and rotation support
+        run: |
+          D=android/app/src/main/java/com/robin/heymusic
+          mkdir -p $D
+          cat > $D/HeyBarsPlugin.java <<'EOF'
+          package com.robin.heymusic;
+
+          import android.content.pm.ActivityInfo;
+          import android.graphics.Color;
+          import android.os.Build;
+          import android.view.WindowManager;
+          import androidx.core.view.WindowCompat;
+          import androidx.core.view.WindowInsetsCompat;
+          import androidx.core.view.WindowInsetsControllerCompat;
+          import com.getcapacitor.Plugin;
+          import com.getcapacitor.PluginCall;
+          import com.getcapacitor.PluginMethod;
+          import com.getcapacitor.annotation.CapacitorPlugin;
+
+          @CapacitorPlugin(name = "HeyBars")
+          public class HeyBarsPlugin extends Plugin {
+            @PluginMethod
+            public void immersive(final PluginCall call) {
+              final boolean on = Boolean.TRUE.equals(call.getBoolean("on", false));
+              getActivity().runOnUiThread(new Runnable() {
+                public void run() {
+                  WindowInsetsControllerCompat c =
+                      WindowCompat.getInsetsController(getActivity().getWindow(), getActivity().getWindow().getDecorView());
+                  if (on) {
+                    if (Build.VERSION.SDK_INT >= 28) {
+                      WindowManager.LayoutParams lp = getActivity().getWindow().getAttributes();
+                      lp.layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES;
+                      getActivity().getWindow().setAttributes(lp);
+                    }
+                    getActivity().getWindow().setStatusBarColor(Color.BLACK);
+                    getActivity().getWindow().setNavigationBarColor(Color.BLACK);
+                    c.setSystemBarsBehavior(WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE);
+                    c.hide(WindowInsetsCompat.Type.systemBars());
+                  } else {
+                    c.show(WindowInsetsCompat.Type.systemBars());
+                  }
+                  call.resolve();
+                }
+              });
+            }
+
+            @PluginMethod
+            public void orient(final PluginCall call) {
+              final int mode = call.getInt("mode", 0);
+              getActivity().runOnUiThread(new Runnable() {
+                public void run() {
+                  getActivity().setRequestedOrientation(mode == 1
+                      ? ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE
+                      : mode == 2 ? ActivityInfo.SCREEN_ORIENTATION_PORTRAIT : ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+                  call.resolve();
+                }
+              });
+            }
+          }
+          EOF
+          cat > $D/MainActivity.java <<'EOF'
+          package com.robin.heymusic;
+
+          import android.os.Bundle;
+          import com.getcapacitor.BridgeActivity;
+
+          public class MainActivity extends BridgeActivity {
+            @Override
+            public void onCreate(Bundle savedInstanceState) {
+              registerPlugin(HeyBarsPlugin.class);
+              super.onCreate(savedInstanceState);
+            }
+          }
+          EOF
+      - run: npx capacitor-assets generate --android
+      - run: npx cap sync android
+      - run: cd android && ./gradlew assembleDebug
+      - uses: actions/upload-artifact@v4
+        with:
+          name: hey-music-apk
+          path: android/app/build/outputs/apk/debug/app-debug.apk
