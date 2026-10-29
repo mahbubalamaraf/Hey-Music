@@ -192,15 +192,30 @@ input[type=range]{flex:1;height:20px;accent-color:var(--ac);background:none;bord
 #vp{position:fixed;inset:0;z-index:25;background:#000;color:#fff;display:none;user-select:none;-webkit-user-select:none}
 #vp.open{display:block}
 #vv{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#000}
+#vw{position:absolute;inset:0;overflow:hidden;background:#000}
+html.vpo,html.vpo body{background:#000!important}
+#vem{display:none;position:absolute;inset:0;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:24px;text-align:center;background:radial-gradient(circle at 50% 35%,#2b1457,#0b0614 72%)}
+#vp.empty #vem{display:flex}
+#vp.empty #vmid,#vp.empty #vbot,#vp.empty #vqb,#vp.empty #vgl,#vp.empty #vv,#vp.empty #vsub{display:none}
+#vp.empty #vtop{background:none}
+.vemi{width:104px;height:104px;border-radius:50%;background:var(--g);display:flex;align-items:center;justify-content:center;box-shadow:0 12px 40px rgba(124,58,237,.45);margin-bottom:8px}
+.vemi svg{width:46px;height:46px;color:#fff}
+#vem h2{font-size:22px;font-weight:700}
+#vem p{font-size:13px;opacity:.7;max-width:290px;line-height:1.55}
+.vemb{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap;justify-content:center}
+.vbtn{height:46px;padding:0 22px;border-radius:23px;background:#fff;color:#000;font-weight:700;font-size:14px;display:inline-flex;align-items:center;gap:8px;border:0;cursor:pointer}
+.vbtn.ghost{background:rgba(255,255,255,.14);color:#fff;border:1px solid rgba(255,255,255,.28)}
+.vbtn svg{width:18px;height:18px}
+.vemh{font-size:11px;opacity:.45;margin-top:6px;letter-spacing:.5px}
 #vgl{position:absolute;inset:0;touch-action:none}
 #vp .ctl{transition:opacity .25s}
 #vp.hide .ctl{opacity:0;pointer-events:none}
 #vp.lock .ctl{display:none}
-#vtop{position:absolute;top:0;left:0;right:0;display:flex;align-items:center;gap:8px;padding:calc(10px + env(safe-area-inset-top,0px)) 12px 28px;background:linear-gradient(#000b,transparent)}
+#vtop{position:absolute;top:0;left:0;right:0;display:flex;align-items:center;gap:8px;padding:calc(10px + env(safe-area-inset-top,0px)) max(12px,env(safe-area-inset-right,0px)) 28px max(12px,env(safe-area-inset-left,0px));background:linear-gradient(#000b,transparent)}
 #vtt{flex:1;min-width:0;font-size:14px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 #vmid{position:absolute;top:50%;left:0;right:0;transform:translateY(-50%);display:flex;justify-content:center;gap:30px;align-items:center;pointer-events:none}
 #vmid .vb{pointer-events:auto}
-#vbot{position:absolute;bottom:0;left:0;right:0;padding:28px 12px calc(10px + env(safe-area-inset-bottom,0px));background:linear-gradient(transparent,#000c)}
+#vbot{position:absolute;bottom:0;left:0;right:0;padding:28px max(12px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(12px,env(safe-area-inset-left,0px));background:linear-gradient(transparent,#000c)}
 .vb{background:rgba(0,0,0,.6);color:#fff;border:1px solid rgba(255,255,255,.28);border-radius:20px;min-width:40px;height:40px;font-size:15px;padding:0 10px;display:inline-flex;align-items:center;justify-content:center;flex:none}
 .vb.on{background:#fff;color:#000}
 .vb svg{width:22px;height:22px;pointer-events:none}
@@ -211,6 +226,7 @@ input[type=range]{flex:1;height:20px;accent-color:var(--ac);background:none;bord
 #vsk::-webkit-slider-thumb,#vvol::-webkit-slider-thumb{-webkit-appearance:none;width:15px;height:15px;border-radius:50%;background:#fff}
 #vvol{width:70px;-webkit-appearance:none;appearance:none;height:4px;border-radius:2px;background:rgba(255,255,255,.35);flex:none}
 .vbr{display:flex;align-items:center;gap:6px;overflow-x:auto;padding-bottom:2px}
+#vsub,#vv::cue{font-family:"Hind Siliguri","Noto Sans",system-ui,sans-serif;font-weight:500}
 #vsub{position:absolute;left:6%;right:6%;bottom:16%;text-align:center;font-size:18px;line-height:1.35;text-shadow:0 0 4px #000,0 0 4px #000,0 0 3px #000;pointer-events:none;white-space:pre-wrap}
 #vind{position:absolute;top:16%;left:50%;transform:translateX(-50%);background:#000b;padding:8px 16px;border-radius:18px;font-size:14px;opacity:0;transition:.2s;pointer-events:none;white-space:nowrap}
 #vind.on{opacity:1}
@@ -307,12 +323,12 @@ input[type=range]{flex:1;height:20px;accent-color:var(--ac);background:none;bord
 
 <div id="ov"><div class="sheet" id="sheet"></div></div>
 <div id="toast"></div>
-<div id="vp"><video id="vv" playsinline></video><div id="vgl"></div><div id="vsub"></div><div id="vind"></div>
+<div id="vp"><div id="vw"><video id="vv" playsinline></video><div id="vgl"></div><div id="vsub"></div><div id="vind"></div><div id="vem"></div>
 <div id="vtop" class="ctl"><button class="vb" id="vbk">←</button><div id="vtt"></div><button class="vb" id="vqb">☰</button></div>
 <div id="vmid" class="ctl"><button class="vb" id="vrw" style="width:52px;height:52px;border-radius:50%">⏪10</button><button class="vb" id="vpp">▶</button><button class="vb" id="vff" style="width:52px;height:52px;border-radius:50%">10⏩</button></div>
 <div id="vbot" class="ctl"><div class="vsr"><span id="vct">0:00</span><input type="range" id="vsk" min="0" max="1000" value="0"><span id="vdt">0:00</span></div>
-<div class="vbr"><button class="vb" id="vpv">⏮</button><button class="vb" id="vnx">⏭</button><button class="vb" id="vmu">🔊</button><input type="range" id="vvol" min="0" max="1" step="0.05" value="1"><button class="vb" id="vsp">1x</button><button class="vb" id="vlg"></button><button class="vb" id="vcc">CC</button><label class="vb" for="vs">📄</label><button class="vb" id="vfit">▣</button><button class="vb" id="vlp">🔁</button><button class="vb" id="vsh">🔀</button><button class="vb" id="vpip">⧉</button><button class="vb" id="vshot">📷</button><button class="vb" id="vlkb">🔒</button><button class="vb" id="vfs">⛶</button></div></div>
-<button class="vb" id="vlk">🔓</button><div id="vql"></div><div id="vlm"></div>
+<div class="vbr"><button class="vb" id="vpv">⏮</button><button class="vb" id="vnx">⏭</button><button class="vb" id="vmu">🔊</button><input type="range" id="vvol" min="0" max="1" step="0.05" value="1"><button class="vb" id="vsp">1x</button><button class="vb" id="vlg"></button><button class="vb" id="vcc">CC</button><label class="vb" for="vs">📄</label><button class="vb" id="vfit">▣</button><button class="vb" id="vlp">🔁</button><button class="vb" id="vsh">🔀</button><button class="vb" id="vpip">⧉</button><button class="vb" id="vshot">📷</button><button class="vb" id="vlkb">🔒</button><button class="vb" id="vrot"></button><button class="vb" id="vfs">⛶</button></div></div>
+<button class="vb" id="vlk">🔓</button><div id="vql"></div><div id="vlm"></div></div>
 <input type="file" id="vf" accept="video/*" multiple hidden><input type="file" id="vs" accept=".srt,.vtt" hidden></div>
 <input type="file" id="fi" multiple hidden>
 <input type="file" id="fd" webkitdirectory multiple hidden>
@@ -326,8 +342,8 @@ const jl=k=>{try{return JSON.parse(ls(k)||"[]")}catch(e){return[]}};
 const FILL={pl:1,pa:1,pv:1,nx:1};
 const ic=(id,c="")=>`<svg class="i ${FILL[id]?"f":""} ${c}"><use href="#ic-${id}" xlink:href="#ic-${id}"/></svg>`;
 const L={
-bn:{lyLoad:"লিরিক্স খোঁজা হচ্ছে...",lyNone:"এই গানের লিরিক্স পাওয়া যায়নি",lyErr:"লিরিক্স লোড করা যায়নি। ইন্টারনেট দেখে আবার চেষ্টা করুন।",lyInst:"এটি একটি ইনস্ট্রুমেন্টাল গান",ph:"গান বা শিল্পী খুঁজুন",explore:"এক্সপ্লোর",history:"ইতিহাস",playlists:"প্লেলিস্ট",nowPlaying:"এখন চলছে",idle:"কোনো গান চলছে না",tap:"একটি গানে ট্যাপ করুন",loading:"লোড হচ্ছে...",err:"গান লোড করা যায়নি",none:"কোনো গান পাওয়া যায়নি",noHist:"এখনো কোনো গান শোনা হয়নি",clear:"মুছুন",newPl:"নতুন",newPlT:"নতুন প্লেলিস্ট",plName:"প্লেলিস্টের নাম",create:"তৈরি",addTo:"প্লেলিস্টে যোগ করুন",noPl:"কোনো প্লেলিস্ট নেই। উপরে নাম লিখে তৈরি করুন।",noPl2:"এখনো কোনো প্লেলিস্ট নেই",emptyPl:"এই প্লেলিস্ট খালি। গানের পাশে + চাপুন।",songs:"টি গান",added:"যোগ হয়েছে",already:"আগেই আছে",yes:"হ্যাঁ",cancel:"বাতিল",delPl:"এই প্লেলিস্ট মুছে ফেলবেন?",clrH:"পুরো ইতিহাস মুছে ফেলবেন?",trending:"ট্রেন্ডিং",Electronic:"ইলেকট্রনিক","Hip-Hop/Rap":"হিপ-হপ","Lo-Fi":"লো-ফাই",Pop:"পপ",Rock:"রক",Acoustic:"অ্যাকোস্টিক",Ambient:"অ্যাম্বিয়েন্ট",Devotional:"ভক্তিমূলক",tag:"BN",local:"আমার গান",addSong:"গান যোগ",noLoc:"এখনো কোনো গান যোগ করা হয়নি। উপরের “গান যোগ” চেপে ফাইল থেকে গান বেছে নিন।",delSong:"এই গানটি মুছে ফেলবেন?",addedN:"টি গান যোগ হয়েছে",addMenu:"যোগ করুন",vlang:"ভাষা ও ট্র্যাক",noAud:"এই ভিডিওতে বা এই ব্রাউজারে একাধিক ভাষার ট্র্যাক পাওয়া যায়নি",vAud:"অডিও",vSub:"সাবটাইটেল",vOff:"বন্ধ",vBr:"উজ্জ্বলতা",vVol:"ভলিউম",vplayer:"ভিডিও প্লেয়ার",vq:"ভিডিও তালিকা",vAdd:"ভিডিও যোগ",vLink:"লিংক",vNone:"কোনো ভিডিও নেই। “ভিডিও যোগ” চেপে ফাইল বেছে নিন।",vLinkP:"ভিডিওর লিংক দিন (mp4/webm)",notVid:"এটি ভিডিও ফাইল নয়",vErr:"ভিডিওটি চালানো যাচ্ছে না (ফরম্যাট সমর্থিত নয়)",subOk:"সাবটাইটেল যোগ হয়েছে",subNo:"সাবটাইটেল পড়া যায়নি",noPip:"PiP সমর্থিত নয়",editT:"ট্যাগ এডিট",fTitle:"গানের নাম",fArtist:"শিল্পীর নাম",pickImg:"ছবি বাছুন",saveT:"সেভ",addFolder:"ফোল্ডার",dupN:"টি আগে থেকেই আছে",memOnly:"স্টোরেজে সেভ হয়নি, শুধু এই সেশনে চলবে",notAudio:"এটি অডিও ফাইল নয়"},
-en:{lyLoad:"Finding lyrics...",lyNone:"No lyrics found for this song",lyErr:"Couldn't load lyrics. Check your connection and try again.",lyInst:"This is an instrumental track",ph:"Search songs or artists",explore:"Explore",history:"History",playlists:"Playlists",nowPlaying:"Now playing",idle:"Nothing playing",tap:"Tap a song to start",loading:"Loading...",err:"Couldn't load songs",none:"No songs found",noHist:"No songs played yet",clear:"Clear",newPl:"New",newPlT:"New playlist",plName:"Playlist name",create:"Create",addTo:"Add to playlist",noPl:"No playlists yet. Type a name above to create one.",noPl2:"No playlists yet",emptyPl:"This playlist is empty. Tap + next to a song.",songs:" songs",added:"Added",already:"Already in playlist",yes:"Yes",cancel:"Cancel",delPl:"Delete this playlist?",clrH:"Clear all history?",trending:"Trending",tag:"EN",local:"My Music",addSong:"Add songs",noLoc:"No songs yet. Tap “Add songs” to pick audio files from your device.",delSong:"Remove this song?",addedN:" song(s) added",addMenu:"Add",vlang:"Language & tracks",noAud:"No extra language tracks found in this video or this browser",vAud:"Audio",vSub:"Subtitles",vOff:"Off",vBr:"Brightness",vVol:"Volume",vplayer:"Video Player",vq:"Video list",vAdd:"Add videos",vLink:"Link",vNone:"No videos yet. Tap “Add videos” to pick files.",vLinkP:"Paste a video link (mp4/webm)",notVid:"Not a video file",vErr:"Can't play this video (format not supported)",subOk:"Subtitles loaded",subNo:"Couldn't read subtitles",noPip:"PiP not supported",editT:"Edit tags",fTitle:"Song title",fArtist:"Artist",pickImg:"Choose image",saveT:"Save",addFolder:"Folder",dupN:" already added",memOnly:"Couldn't save to storage; plays this session only",notAudio:"Not an audio file"}
+bn:{lyLoad:"লিরিক্স খোঁজা হচ্ছে...",lyNone:"এই গানের লিরিক্স পাওয়া যায়নি",lyErr:"লিরিক্স লোড করা যায়নি। ইন্টারনেট দেখে আবার চেষ্টা করুন।",lyInst:"এটি একটি ইনস্ট্রুমেন্টাল গান",ph:"গান বা শিল্পী খুঁজুন",explore:"এক্সপ্লোর",history:"ইতিহাস",playlists:"প্লেলিস্ট",nowPlaying:"এখন চলছে",idle:"কোনো গান চলছে না",tap:"একটি গানে ট্যাপ করুন",loading:"লোড হচ্ছে...",err:"গান লোড করা যায়নি",none:"কোনো গান পাওয়া যায়নি",noHist:"এখনো কোনো গান শোনা হয়নি",clear:"মুছুন",newPl:"নতুন",newPlT:"নতুন প্লেলিস্ট",plName:"প্লেলিস্টের নাম",create:"তৈরি",addTo:"প্লেলিস্টে যোগ করুন",noPl:"কোনো প্লেলিস্ট নেই। উপরে নাম লিখে তৈরি করুন।",noPl2:"এখনো কোনো প্লেলিস্ট নেই",emptyPl:"এই প্লেলিস্ট খালি। গানের পাশে + চাপুন।",songs:"টি গান",added:"যোগ হয়েছে",already:"আগেই আছে",yes:"হ্যাঁ",cancel:"বাতিল",delPl:"এই প্লেলিস্ট মুছে ফেলবেন?",clrH:"পুরো ইতিহাস মুছে ফেলবেন?",trending:"ট্রেন্ডিং",Electronic:"ইলেকট্রনিক","Hip-Hop/Rap":"হিপ-হপ","Lo-Fi":"লো-ফাই",Pop:"পপ",Rock:"রক",Acoustic:"অ্যাকোস্টিক",Ambient:"অ্যাম্বিয়েন্ট",Devotional:"ভক্তিমূলক",tag:"BN",local:"আমার গান",addSong:"গান যোগ",noLoc:"এখনো কোনো গান যোগ করা হয়নি। উপরের “গান যোগ” চেপে ফাইল থেকে গান বেছে নিন।",delSong:"এই গানটি মুছে ফেলবেন?",addedN:"টি গান যোগ হয়েছে",addMenu:"যোগ করুন",noFs:"ফুলস্ক্রিন সমর্থিত নয়",vlang:"ভাষা ও ট্র্যাক",vEmp:"আপনার ফোনের ভিডিও ফাইল যোগ করুন, অথবা লিংক দিয়ে ভিডিও চালান। একাধিক ভাষা, সাবটাইটেল আর স্পিড কন্ট্রোল সহ।",noAud:"এই ভিডিওতে বা এই ব্রাউজারে একাধিক ভাষার ট্র্যাক পাওয়া যায়নি",vAud:"অডিও",vSub:"সাবটাইটেল",vOff:"বন্ধ",vBr:"উজ্জ্বলতা",vVol:"ভলিউম",vplayer:"ভিডিও প্লেয়ার",vq:"ভিডিও তালিকা",vAdd:"ভিডিও যোগ",vLink:"লিংক",vNone:"কোনো ভিডিও নেই। “ভিডিও যোগ” চেপে ফাইল বেছে নিন।",vLinkP:"ভিডিওর লিংক দিন (mp4/webm)",notVid:"এটি ভিডিও ফাইল নয়",vErr:"ভিডিওটি চালানো যাচ্ছে না (ফরম্যাট সমর্থিত নয়)",subOk:"সাবটাইটেল যোগ হয়েছে",subNo:"সাবটাইটেল পড়া যায়নি",noPip:"PiP সমর্থিত নয়",editT:"ট্যাগ এডিট",fTitle:"গানের নাম",fArtist:"শিল্পীর নাম",pickImg:"ছবি বাছুন",saveT:"সেভ",addFolder:"ফোল্ডার",dupN:"টি আগে থেকেই আছে",memOnly:"স্টোরেজে সেভ হয়নি, শুধু এই সেশনে চলবে",notAudio:"এটি অডিও ফাইল নয়"},
+en:{lyLoad:"Finding lyrics...",lyNone:"No lyrics found for this song",lyErr:"Couldn't load lyrics. Check your connection and try again.",lyInst:"This is an instrumental track",ph:"Search songs or artists",explore:"Explore",history:"History",playlists:"Playlists",nowPlaying:"Now playing",idle:"Nothing playing",tap:"Tap a song to start",loading:"Loading...",err:"Couldn't load songs",none:"No songs found",noHist:"No songs played yet",clear:"Clear",newPl:"New",newPlT:"New playlist",plName:"Playlist name",create:"Create",addTo:"Add to playlist",noPl:"No playlists yet. Type a name above to create one.",noPl2:"No playlists yet",emptyPl:"This playlist is empty. Tap + next to a song.",songs:" songs",added:"Added",already:"Already in playlist",yes:"Yes",cancel:"Cancel",delPl:"Delete this playlist?",clrH:"Clear all history?",trending:"Trending",tag:"EN",local:"My Music",addSong:"Add songs",noLoc:"No songs yet. Tap “Add songs” to pick audio files from your device.",delSong:"Remove this song?",addedN:" song(s) added",addMenu:"Add",noFs:"Fullscreen not supported",vlang:"Language & tracks",vEmp:"Add video files from your phone or play from a link. With multi-language audio, subtitles and speed control.",noAud:"No extra language tracks found in this video or this browser",vAud:"Audio",vSub:"Subtitles",vOff:"Off",vBr:"Brightness",vVol:"Volume",vplayer:"Video Player",vq:"Video list",vAdd:"Add videos",vLink:"Link",vNone:"No videos yet. Tap “Add videos” to pick files.",vLinkP:"Paste a video link (mp4/webm)",notVid:"Not a video file",vErr:"Can't play this video (format not supported)",subOk:"Subtitles loaded",subNo:"Couldn't read subtitles",noPip:"PiP not supported",editT:"Edit tags",fTitle:"Song title",fArtist:"Artist",pickImg:"Choose image",saveT:"Save",addFolder:"Folder",dupN:" already added",memOnly:"Couldn't save to storage; plays this session only",notAudio:"Not an audio file"}
 };
 let lang=ls("hm_lang")||"bn";if(!L[lang])lang="bn";
 const T=k=>L[lang][k]||k;
@@ -616,26 +632,38 @@ const vfm=x=>{x=Math.max(0,x|0);const h=x/3600|0,m=(x%3600)/60|0,c=x%60;return(h
 const vind=t=>{const e=$("vind");e.textContent=t;e.classList.add("on");clearTimeout(vind.t);vind.t=setTimeout(()=>e.classList.remove("on"),900)};
 let vtm;
 function vshow(){vp.classList.remove("hide");clearTimeout(vtm);if(!vv.paused&&!$("vql").classList.contains("open"))vtm=setTimeout(()=>vp.classList.add("hide"),3000)}
-function vopen(){vp.classList.add("open");vrq();if(!V.q.length)$("vql").classList.add("open");vshow()}
-function vclose(){vv.pause();vsv(1);vp.classList.remove("open");try{if(document.fullscreenElement)document.exitFullscreen()}catch(e){}}
+function vopen(){try{document.fonts.load('500 18px "Hind Siliguri"')}catch(e){}vp.classList.add("open");document.documentElement.classList.add("vpo");vfull(1).catch(()=>{});vrq();if(V.q.length&&V.i<0)$("vql").classList.add("open");vshow()}
+function vclose(){vv.pause();vsv(1);vp.classList.remove("open");document.documentElement.classList.remove("vpo");V.rot=0;vrotA();try{screen.orientation.unlock()}catch(e){}vfull(0).catch(()=>{})}
+async function vfull(on){const d=document,fe=d.fullscreenElement||d.webkitFullscreenElement;if(on){if(!fe)await(vp.requestFullscreen||vp.webkitRequestFullscreen).call(vp)}else if(fe)await(d.exitFullscreen||d.webkitExitFullscreen).call(d)}
+const vW=()=>V.rot?innerHeight:innerWidth,vH=()=>V.rot?innerWidth:innerHeight,vxy=e=>V.rot?[e.clientY,innerWidth-e.clientX]:[e.clientX,e.clientY];
+function vrotA(){const w=$("vw");if(V.rot){Object.assign(w.style,{inset:"auto",top:"0",left:"0",width:innerHeight+"px",height:innerWidth+"px",transformOrigin:"top left",transform:`translateX(${innerWidth}px) rotate(90deg)`})}else w.removeAttribute("style")}
+addEventListener("resize",()=>{if(V.rot)vrotA()});
+async function vrot(){if(V.rot){V.rot=0;vrotA();try{screen.orientation.unlock()}catch(e){}return}
+  const land=innerWidth>innerHeight;try{await vfull(1)}catch(e){}
+  try{await screen.orientation.lock(land?"portrait":"landscape")}catch(e){}
+  setTimeout(()=>{if(!land&&innerWidth<=innerHeight){V.rot=1;vrotA()}},600)}
 const vpos=()=>{try{return JSON.parse(localStorage.getItem("hm_vpos")||"{}")}catch(e){return{}}};
 function vsv(force){const t=V.q[V.i];if(!t||!vv.duration)return;if(!force&&Date.now()-V.ts<3000)return;V.ts=Date.now();try{const p=vpos();p[t.key]=vv.ended?0:vv.currentTime;localStorage.setItem("hm_vpos",JSON.stringify(p))}catch(e){}}
 function vplay(i){if(i<0||i>=V.q.length)return;V.i=i;const t=V.q[i];au.pause();V.sub=[];$("vsub").textContent="";$("vtt").textContent=t.name;
-  const p=vpos()[t.key]||0;vv.src=t.url;
+  const p=vpos()[t.key]||0;vv.src=t.pu||t.url;
   vv.onloadedmetadata=()=>{if(p>5&&p<vv.duration-5){vv.currentTime=p;vind("↺ "+vfm(p))}$("vtt").textContent=t.name+" · "+vv.videoWidth+"×"+vv.videoHeight};
   vv.onerror=()=>vind(T("vErr"));vv.playbackRate=SP[V.si];vv.play().catch(()=>{});vrq()}
 function vadd(fs){const a=[...fs].filter(f=>(f.type||"").startsWith("video")||/\.(mp4|mkv|webm|mov|avi|3gp|m4v|ogv|ts)$/i.test(f.name));if(!a.length){vind(T("notVid"));return}
-  const st=V.q.length;a.forEach(f=>V.q.push({name:f.name.replace(/\.[^.]+$/,""),url:URL.createObjectURL(f),key:f.name+"|"+f.size}));
+  const st=V.q.length;a.forEach(f=>V.q.push({name:f.name.replace(/\.[^.]+$/,""),url:URL.createObjectURL(f),key:f.name+"|"+f.size,file:f}));
   if(V.i<0||vv.paused)vplay(st);else vrq();$("vql").classList.remove("open");vshow()}
 function vnext(){if($("vsh").classList.contains("on")&&V.q.length>1){let n;do n=Math.random()*V.q.length|0;while(n===V.i);vplay(n)}else if(V.i<V.q.length-1)vplay(V.i+1)}
 function vprev(){if(vv.currentTime>3||V.i<1)vv.currentTime=0;else vplay(V.i-1)}
 const vtog=()=>vv.paused?vv.play().catch(()=>{}):vv.pause();
 const vseek=d=>{vv.currentTime=Math.min(Math.max(0,vv.currentTime+d),vv.duration||1e9);vind((d>0?"+":"")+d+"s")};
-function vrq(){$("vql").innerHTML=`<h3 style="margin-bottom:10px">${T("vq")}</h3><div class="row2" style="margin:0 0 10px"><label class="ok" for="vf" style="display:flex;flex:1;align-items:center;justify-content:center;cursor:pointer">${T("vAdd")}</label><button id="vlnk">${T("vLink")}</button></div>`+(V.q.length?V.q.map((t,i)=>`<div class="vi${i===V.i?" cur":""}" data-i="${i}"><span>${esc(t.name)}</span><button class="ib" data-r="${i}">${ic("x")}</button></div>`).join(""):`<div class="a">${T("vNone")}</div>`)}
+function vrq(){vp.classList.toggle("empty",V.i<0&&!V.q.length);
+  $("vem").innerHTML=`<div class="vemi">${vic("play")}</div><h2>${T("vplayer")}</h2><p>${T("vEmp")}</p><div class="vemb"><label class="vbtn" for="vf">${ic("pu")}${T("vAdd")}</label><button class="vbtn ghost" id="vlnk2">${T("vLink")}</button></div><div class="vemh">MP4 · MKV · WebM · MOV</div>`;
+  $("vql").innerHTML=`<h3 style="margin-bottom:10px">${T("vq")}</h3><div class="row2" style="margin:0 0 10px"><label class="ok" for="vf" style="display:flex;flex:1;align-items:center;justify-content:center;cursor:pointer">${T("vAdd")}</label><button id="vlnk">${T("vLink")}</button></div>`+(V.q.length?V.q.map((t,i)=>`<div class="vi${i===V.i?" cur":""}" data-i="${i}"><span>${esc(t.name)}</span><button class="ib" data-r="${i}">${ic("x")}</button></div>`).join(""):`<div class="a">${T("vNone")}</div>`)}
 $("vql").onclick=e=>{const r=e.target.closest("[data-r]"),it=e.target.closest("[data-i]");
   if(e.target.closest("#vlnk")){let u=prompt(T("vLinkP"));if(u&&/^https?:/i.test(u.trim())){u=u.trim();let n=u;try{n=decodeURIComponent(u.split("?")[0].split("/").pop())||u}catch(x){}V.q.push({name:n,url:u,key:u});vplay(V.q.length-1);$("vql").classList.remove("open");vshow()}}
-  else if(r){const i=+r.dataset.r,t=V.q[i];if(t.url.startsWith("blob:"))URL.revokeObjectURL(t.url);V.q.splice(i,1);if(i===V.i){vv.pause();vv.removeAttribute("src");vv.load();V.i=-1;$("vtt").textContent=""}else if(i<V.i)V.i--;vrq()}
+  else if(r){const i=+r.dataset.r,t=V.q[i];if(t.url.startsWith("blob:"))URL.revokeObjectURL(t.url);if(t.pu)URL.revokeObjectURL(t.pu);V.q.splice(i,1);if(i===V.i){vv.pause();vv.removeAttribute("src");vv.load();V.i=-1;$("vtt").textContent=""}else if(i<V.i)V.i--;vrq()}
   else if(it){vplay(+it.dataset.i);$("vql").classList.remove("open");vshow()}};
+function vlink(){let u=prompt(T("vLinkP"));if(u&&/^https?:/i.test(u.trim())){u=u.trim();let n=u;try{n=decodeURIComponent(u.split("?")[0].split("/").pop())||u}catch(x){}V.q.push({name:n,url:u,key:u});vplay(V.q.length-1);vshow()}}
+$("vem").onclick=e=>{if(e.target.closest("#vlnk2"))vlink()};
 $("vf").onchange=e=>{const fs=[...e.target.files];e.target.value="";vadd(fs)};
 function vparse(x){const tm=z=>{const m=z.trim().match(/(?:(\d+):)?(\d+):(\d+)[,.](\d+)/);return m?(+(m[1]||0))*3600+ +m[2]*60+ +m[3]+ +("0."+m[4]):0};
   return x.replace(/\r/g,"").replace(/^\uFEFF/,"").split(/\n\n+/).map(b=>{const l=b.split("\n"),k=l.findIndex(y=>y.includes("-->"));if(k<0)return null;const[a,z]=l[k].split("-->");return[tm(a),tm(z),l.slice(k+1).join("\n").replace(/<[^>]+>|\{[^}]+\}/g,"")]}).filter(Boolean)}
@@ -663,14 +691,15 @@ $("vpip").onclick=()=>{try{if(document.pictureInPictureElement)document.exitPict
 $("vshot").onclick=()=>{try{const c=document.createElement("canvas");c.width=vv.videoWidth;c.height=vv.videoHeight;c.getContext("2d").drawImage(vv,0,0);c.toBlob(b=>{const a=document.createElement("a");a.href=URL.createObjectURL(b);a.download=(($("vtt").textContent||"video").split(" · ")[0])+"-"+vfm(vv.currentTime).replace(/:/g,"-")+".png";a.click();vind("✓")})}catch(e){}};
 $("vlkb").onclick=()=>{V.lk=1;vp.classList.add("lock")};
 $("vlk").onclick=()=>{V.lk=0;vp.classList.remove("lock");vshow()};
-$("vfs").onclick=async()=>{try{if(document.fullscreenElement||document.webkitFullscreenElement){await(document.exitFullscreen||document.webkitExitFullscreen).call(document);screen.orientation&&screen.orientation.unlock&&screen.orientation.unlock()}else{await(vp.requestFullscreen||vp.webkitRequestFullscreen).call(vp);screen.orientation&&screen.orientation.lock&&screen.orientation.lock("landscape").catch(()=>{})}}catch(e){}};
+$("vfs").onclick=async()=>{try{if(document.fullscreenElement||document.webkitFullscreenElement)await vfull(0);else await vfull(1)}catch(e){vind(T("noFs"))}};
+$("vrot").onclick=vrot;
 {const g=$("vgl");let lt=0,sx=0,sy=0,sm=0,s0=0;
-  g.onclick=e=>{const pn=document.querySelector("#vql.open,#vlm.open");if(pn){pn.classList.remove("open");vshow();return}if(V.lk)return;const n=Date.now(),x=e.clientX/innerWidth;
+  g.onclick=e=>{const pn=document.querySelector("#vql.open,#vlm.open");if(pn){pn.classList.remove("open");vshow();return}if(V.lk)return;const n=Date.now(),x=vxy(e)[0]/vW();
     if(n-lt<300){lt=0;if(x<.35)vseek(-10);else if(x>.65)vseek(10);else vtog()}else{lt=n;setTimeout(()=>{if(lt===n){vp.classList.contains("hide")?vshow():vp.classList.add("hide")}},300)}};
-  g.ontouchstart=e=>{const t=e.touches[0];sx=t.clientX;sy=t.clientY;sm=0;s0=sx<innerWidth/2?V.br:vv.volume};
-  g.ontouchmove=e=>{if(V.lk)return;const t=e.touches[0],dy=sy-t.clientY;if(!sm&&Math.abs(dy)>16&&Math.abs(dy)>Math.abs(t.clientX-sx))sm=1;if(!sm)return;
-    if(sx<innerWidth/2){V.br=Math.min(1.6,Math.max(.3,s0+dy/innerHeight*1.6));vv.style.filter=`brightness(${V.br})`;vind(T("vBr")+" "+Math.round(V.br*100)+"%")}
-    else{vv.volume=Math.min(1,Math.max(0,s0+dy/innerHeight*1.6));vv.muted=false;$("vvol").value=vv.volume;vmi();vind(T("vVol")+" "+Math.round(vv.volume*100)+"%")}};}
+  g.ontouchstart=e=>{const t=vxy(e.touches[0]);sx=t[0];sy=t[1];sm=0;s0=sx<vW()/2?V.br:vv.volume};
+  g.ontouchmove=e=>{if(V.lk)return;const t=vxy(e.touches[0]),dy=sy-t[1];if(!sm&&Math.abs(dy)>16&&Math.abs(t[0]-sx)<Math.abs(dy))sm=1;if(!sm)return;
+    if(sx<vW()/2){V.br=Math.min(1.6,Math.max(.3,s0+dy/vH()*1.6));vv.style.filter=`brightness(${V.br})`;vind(T("vBr")+" "+Math.round(V.br*100)+"%")}
+    else{vv.volume=Math.min(1,Math.max(0,s0+dy/vH()*1.6));vv.muted=false;$("vvol").value=vv.volume;vmi();vind(T("vVol")+" "+Math.round(vv.volume*100)+"%")}}}
 document.addEventListener("keydown",e=>{if(!vp.classList.contains("open")||/INPUT|TEXTAREA/.test(e.target.tagName))return;const k=e.key;
   if(k===" "||k==="k"){e.preventDefault();vtog()}else if(k==="ArrowRight")vseek(5);else if(k==="ArrowLeft")vseek(-5);else if(k==="l")vseek(10);else if(k==="j")vseek(-10);
   else if(k==="ArrowUp"){e.preventDefault();vv.volume=Math.min(1,vv.volume+.05);$("vvol").value=vv.volume}else if(k==="ArrowDown"){e.preventDefault();vv.volume=Math.max(0,vv.volume-.05);$("vvol").value=vv.volume}
@@ -686,19 +715,47 @@ fit:'<rect x="3" y="5" width="18" height="14" rx="2"/><rect x="8" y="9" width="8
 shuf:'<path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/>',pip:'<rect x="3" y="5" width="18" height="14" rx="2"/><rect x="12" y="11" width="7" height="5" rx="1" fill="currentColor"/>',
 cam:'<path d="M3 8a2 2 0 012-2h2l2-2h6l2 2h2a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><circle cx="12" cy="13" r="3.5"/>',
 lock:'<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/>',unlock:'<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 017.5-1.5"/>',
-fs:'<path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/>',globe:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 010 18M12 3a14 14 0 000 18"/>'};
+fs:'<path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/>',rot:'<rect x="8" y="4" width="8" height="16" rx="2"/><path d="M3 8V5h3M21 16v3h-3"/>',globe:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 010 18M12 3a14 14 0 000 18"/>'};
 const vic=n=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${VP[n]}</svg>`;
-{const VM={vbk:"back",vqb:"list",vrw:"rw",vff:"ff",vpp:"play",vpv:"prev",vnx:"next",vmu:"vol",vcc:"cc",vfit:"fit",vlp:"loop",vsh:"shuf",vpip:"pip",vshot:"cam",vlkb:"lock",vlk:"unlock",vfs:"fs",vlg:"globe"};
+{const VM={vbk:"back",vqb:"list",vrw:"rw",vff:"ff",vpp:"play",vpv:"prev",vnx:"next",vmu:"vol",vcc:"cc",vfit:"fit",vlp:"loop",vsh:"shuf",vpip:"pip",vshot:"cam",vlkb:"lock",vlk:"unlock",vfs:"fs",vlg:"globe",vrot:"rot"};
   for(const k in VM)$(k).innerHTML=vic(VM[k]);document.querySelector('label[for="vs"]').innerHTML=vic("sub")}
 const vdn=c=>{try{return new Intl.DisplayNames(["bn"],{type:"language"}).of(c)}catch(e){return c}};
-function vlang(){const at=vv.audioTracks,tt=vv.textTracks,it=[];
+function mp4tr(b){const tr=[],kids=(a,e)=>{const r=[];let p=a;while(p+8<=e){let n=be(b,p);const t=asc(b,p+4,4);if(n<8||p+n>e)n=e-p;r.push([t,p,n]);p+=n}return r},fd=(a,e,t)=>kids(a,e).find(k=>k[0]===t);
+  const mv=fd(0,b.length,"moov");if(!mv)return tr;
+  for(const[t,p,n]of kids(mv[1]+8,mv[1]+mv[2]))if(t==="trak"){const e=p+n,md=fd(p+8,e,"mdia");if(!md)continue;const me=md[1]+md[2],mh=fd(md[1]+8,me,"mdhd"),hd=fd(md[1]+8,me,"hdlr");
+    let lang="";if(mh){const v=b[mh[1]+8],x=(b[mh[1]+8+(v?32:20)]<<8)|b[mh[1]+8+(v?33:21)];lang=String.fromCharCode(((x>>10)&31)+96,((x>>5)&31)+96,(x&31)+96)}
+    let codec="";const mi=fd(md[1]+8,me,"minf"),st=mi&&fd(mi[1]+8,mi[1]+mi[2],"stbl"),sd=st&&fd(st[1]+8,st[1]+st[2],"stsd");if(sd)codec=asc(b,sd[1]+20,4);
+    tr.push({t:hd?asc(b,hd[1]+16,4):"",lang,codec,off:p})}
+  return tr}
+async function vmp4(f){let p=0;while(p+8<=f.size){const h=await rd(f,p,16),dv=new DataView(h.buffer);let n=dv.getUint32(0);const t=asc(h,4,4);if(n===1)n=Number(dv.getBigUint64(8));if(n===0)n=f.size-p;
+    if(t==="moov"){if(n>4e7)return{a:[]};const b=await rd(f,p,n),a=mp4tr(b).filter(x=>x.t==="soun");
+      return{a,make:k=>{const c=b.slice();a.forEach((x,i)=>{if(i!==k)c.set([102,114,101,101],x.off+4)});return new Blob([f.slice(0,p),c,f.slice(p+b.length)],{type:f.type||"video/mp4"})}}}
+    if(n<8)break;p+=n}return{a:[]}}
+async function vmkv(f){const N=Math.min(f.size,4e6),b=await rd(f,0,N),a=[];
+  const id=p=>{let l=1,m=128;while(l<5&&!(b[p]&m)){l++;m>>=1}let v=0;for(let i=0;i<l;i++)v=v*256+b[p+i];return[v,l]};
+  const sz=p=>{let l=1,m=128;while(l<9&&!(b[p]&m)){l++;m>>=1}let v=b[p]&(m-1),al=v===m-1;for(let i=1;i<l;i++){v=v*256+b[p+i];if(b[p+i]!==255)al=false}return[al?Infinity:v,l]};
+  let p=0;while(p<N-12){const[i,il]=id(p),[n,sl]=sz(p+il),d=p+il+sl;if(i===0x18538067){p=d;continue}if(i===0x1F43B675||n===Infinity)break;
+    if(i===0x1654AE6B){const te=Math.min(d+n,N);let q=d;while(q<te-2){const[i2,l2]=id(q),[n2,s2]=sz(q+l2),d2=q+l2+s2;
+      if(i2===0xAE){const en=Math.min(d2+n2,te),e={};let r=d2;while(r<en-2){const[i3,l3]=id(r),[n3,s3]=sz(r+l3),d3=r+l3+s3;
+        if(i3===0x83){e.type=b[d3+n3-1];e.tp=d3+n3-1;e.tl=n3}else if(i3===0x22B59C||i3===0x22B59D){const z=new TextDecoder().decode(b.subarray(d3,d3+n3)).replace(/\0/g,"");if(i3===0x22B59D||!e.lang)e.lang=z}
+        else if(i3===0x536E)e.name=u8t(b.subarray(d3,d3+n3));else if(i3===0x86)e.codec=asc(b,d3,n3);r=d3+n3}
+        if(e.type===2&&e.tl===1)a.push(e)}q=d2+n2}break}
+    p=d+n}
+  return{a,make:k=>{const c=b.slice();a.forEach((x,i)=>{if(i!==k)c[x.tp]=17});return new Blob([c,f.slice(N)],{type:f.type||"video/x-matroska"})}}}
+async function vana(t){if(t.tr)return t.tr;let r={a:[]};
+  try{const f=t.file;if(f){const h=await rd(f,0,12);if(asc(h,4,4)==="ftyp"||/^(moov|mdat|free|wide)$/.test(asc(h,4,4)))r=await vmp4(f);else if(be(h,0)===0x1A45DFA3)r=await vmkv(f)}}catch(e){}
+  return t.tr=r}
+async function vsw(t,k){const keep=vv.currentTime,pl=!vv.paused;vind("…");const u=URL.createObjectURL(t.tr.make(k));if(t.pu)URL.revokeObjectURL(t.pu);t.pu=u;t.sel=k;
+  vv.src=u;vv.onloadedmetadata=()=>{vv.currentTime=keep;if(pl)vv.play().catch(()=>{})};vv.playbackRate=SP[V.si]}
+async function vlang(){const t=V.q[V.i],at=vv.audioTracks,tt=vv.textTracks,it=[];
   if(at&&at.length>1)for(let i=0;i<at.length;i++){const a=at[i];it.push(["a",i,a.label||(a.language&&vdn(a.language))||T("vAud")+" "+(i+1),a.enabled])}
+  else if(t&&t.file){vind("…");const r=await vana(t);r.a.forEach((x,k)=>{const dd=x.lang&&x.lang!=="und"?vdn(x.lang):"";it.push(["m",k,(dd||x.name||T("vAud")+" "+(k+1))+(x.codec?" · "+String(x.codec).replace(/^A_/,""):""),(t.sel||0)===k])})}
   Array.from(tt||[]).forEach((x,i)=>{if(x.kind==="subtitles"||x.kind==="captions")it.push(["t",i,x.label||(x.language&&vdn(x.language))||T("vSub")+" "+(i+1),x.mode==="showing"])});
   if(!it.length){vind(T("noAud"));return}
-  $("vlm").innerHTML=`<h3 style="margin-bottom:10px">${T("vlang")}</h3>`+it.map((x,k)=>`<div class="vi${x[3]?" cur":""}" data-k="${k}"><span>${x[0]==="a"?T("vAud"):T("vSub")} · ${esc(String(x[2]))}</span></div>`).join("")+(it.some(x=>x[0]==="t")?`<div class="vi" data-k="off"><span>${T("vSub")} · ${T("vOff")}</span></div>`:"");
+  $("vlm").innerHTML=`<h3 style="margin-bottom:10px">${T("vlang")}</h3>`+it.map((x,k)=>`<div class="vi${x[3]?" cur":""}" data-k="${k}"><span>${x[0]==="t"?T("vSub"):T("vAud")} · ${esc(String(x[2]))}</span></div>`).join("")+(it.some(x=>x[0]==="t")?`<div class="vi" data-k="off"><span>${T("vSub")} · ${T("vOff")}</span></div>`:"");
   $("vlm").onclick=e=>{const d=e.target.closest("[data-k]");if(!d)return;const k=d.dataset.k;
     if(k==="off"){for(const x of tt)x.mode="disabled"}
-    else{const x=it[+k];if(x[0]==="a"){for(let j=0;j<at.length;j++)at[j].enabled=j===x[1]}else{for(let j=0;j<tt.length;j++)if(tt[j].kind==="subtitles"||tt[j].kind==="captions")tt[j].mode=j===x[1]?"showing":"disabled";V.sub=[];$("vsub").textContent=""}}
+    else{const x=it[+k];if(x[0]==="a"){for(let j=0;j<at.length;j++)at[j].enabled=j===x[1]}else if(x[0]==="m"){if(x[1]!==(t.sel||0))vsw(t,x[1])}else{for(let j=0;j<tt.length;j++)if(tt[j].kind==="subtitles"||tt[j].kind==="captions")tt[j].mode=j===x[1]?"showing":"disabled";V.sub=[];$("vsub").textContent=""}}
     $("vlm").classList.remove("open");vshow()};
   $("vql").classList.remove("open");$("vlm").classList.toggle("open");vshow()}
 $("vlg").onclick=vlang;
