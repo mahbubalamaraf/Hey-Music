@@ -18,10 +18,14 @@ jobs:
           sed -i 's/targetSdkVersion = .*/targetSdkVersion = 34/' android/variables.gradle
       - name: Add immersive fullscreen and rotation support
         run: |
-          D=android/app/src/main/java/com/robin/heymusic
+          MA=$(find android/app/src/main/java -name 'MainActivity.*' | head -1)
+          PKG=$(grep -m1 '^package ' "$MA" | sed 's/^package \([^; ]*\).*/\1/' | tr -d '\r')
+          echo "Detected package: $PKG"
+          D=android/app/src/main/java/$(echo $PKG | tr . /)
+          find android/app/src/main/java -name 'MainActivity.*' -delete
           mkdir -p $D
           cat > $D/HeyBarsPlugin.java <<'EOF'
-          package com.robin.heymusic;
+          package PKGNAME;
 
           import android.app.Activity;
           import android.content.pm.ActivityInfo;
@@ -99,7 +103,7 @@ jobs:
           }
           EOF
           cat > $D/MainActivity.java <<'EOF'
-          package com.robin.heymusic;
+          package PKGNAME;
 
           import android.os.Bundle;
           import com.getcapacitor.BridgeActivity;
@@ -118,6 +122,7 @@ jobs:
             }
           }
           EOF
+          sed -i "s/PKGNAME/$PKG/" $D/HeyBarsPlugin.java $D/MainActivity.java
       - name: Fix duplicate Kotlin classes
         run: |
           cat >> android/build.gradle <<'EOF'
